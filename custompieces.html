@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Pieces | Wearable Art</title>
+    <meta name="description" content="Custom wearable art pieces, hand-painted clothing, reimagined fashion with zero sign-ups required">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --surface: #111111;
+            --surface-light: #1a1a1a;
+            --text: #e5e5e5;
+            --text-light: #a3a3a3;
+            --accent: #ffffff;
+            --border: #262626;
+            --logo-colors: #FF6B6B, #4ECDC4, #FFD166, #06D6A0, #118AB2, #EF476F;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header with Colorful Logo */
+        header {
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background-color: var(--bg);
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            gap: 2px;
+        }
+
+        .logo-letter {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-letter:nth-child(1) { color: #e93f3f; }
+        .logo-letter:nth-child(2) { color: #5757d1; }
+        .logo-letter:nth-child(3) { color: #bbbb29; }
+        .logo-letter:nth-child(4) { color: #06d6a0; }
+        .logo-letter:nth-child(5) { color: #04b5f0; }
+        .logo-letter:nth-child(6) { color: #d40737; }
+        .logo-letter:nth-child(7) { color: #e95f03; }
+        .logo-letter:nth-child(8) { color: #9b32d8; }
+        .logo-letter:nth-child(9) { color: #da3c56; }
+        .logo-letter:nth-child(10) { color: #59be50; }
+        .logo-letter:nth-child(11) { color: #118AB2; }
+        .logo-letter:nth-child(12) { color: #ce4464; }
+
+        .logo:hover .logo-letter {
+            transform: translateY(-3px);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 100px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .privacy-notice {
+            background: var(--surface);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 30px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            border: 1px solid var(--border);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface);
+            transform: translateY(-2px);
+        }
+
+        .btn-loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Services Section */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--surface);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            background: var(--surface-light);
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        /* Auction Section - STATIC VERSION */
+        .auction-section {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .auction-live {
+            background: var(--surface-light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .auction-live h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .countdown {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .auction-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .auction-content:last-child {
+            margin-bottom: 0;
+        }
+
+        .auction-image {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--surface-light);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+        }
+
+        .auction-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .auction-details h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .current-bid {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .bidder, .time-left {
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .bid-form {
+            margin: 25px 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .bid-form input {
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 150px;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .bid-form input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .auction-rules {
+            background: var(--surface-light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .auction-rules h4 {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .auction-rules ul {
+            list-style: none;
+        }
+
+        .auction-rules li {
+            margin-bottom: 8px;
+            color: var(--text-light);
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .auction-rules li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .auction-note {
+            background: var(--surface-light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .auction-note strong {
+            color: var(--accent);
+        }
+
+        /* Shop Section */
+        .shop-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .filter.active, .filter:hover {
+            background: var(--accent);
+            color: var(--bg);
+            border-color: var(--accent);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--surface);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+            background: var(--surface-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .size-info {
+           color: var(--text-light);
+           font-size: 0.9rem;
+           margin-bottom: 15px;
+           opacity: 0.8;
+        }
+
+        .source {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: inline-block;
+            padding: 4px 10px;
+            background: var(--surface-light);
+            border-radius: 4px;
+        }
+
+        /* Forms */
+        .form-section {
+            background: var(--surface);
+            padding: 50px 40px;
+            border-radius: 12px;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-error {
+            color: #FF6B6B;
+            font-size: 0.875rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .form-error.show {
+            display: block;
+        }
+
+        .consignment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .option-card {
+            background: var(--surface-light);
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .option-card.selected {
+            border-color: var(--accent);
+        }
+
+        .option-card h4 {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .rate {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Commission Steps */
+        .commission-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .step-number {
+            background: var(--surface-light);
+            color: var(--accent);
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            font-weight: 600;
+            border: 1px solid var(--border);
+        }
+
+        .step h4 {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .step p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--surface);
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a, .footer-links span {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--surface-light);
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Modal for Success Messages */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .modal-content p {
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .auction-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .consignment-options {
+                grid-template-columns: 1fr;
+            }
+
+            .form-section {
+                padding: 40px 25px;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .commission-steps {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .bid-form {
+                flex-direction: column;
+            }
+
+            .bid-form input {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: var(--bg);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Colorful Logo -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" aria-label="Custom Pieces - Colorful Logo">
+                    <span class="logo-letter">C</span>
+                    <span class="logo-letter">u</span>
+                    <span class="logo-letter">s</span>
+                    <span class="logo-letter">t</span>
+                    <span class="logo-letter">o</span>
+                    <span class="logo-letter">m</span>
+                    <span class="logo-letter" style="margin-left: 8px;">P</span>
+                    <span class="logo-letter">i</span>
+                    <span class="logo-letter">e</span>
+                    <span class="logo-letter">c</span>
+                    <span class="logo-letter">e</span>
+                    <span class="logo-letter">s</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="#auctions">Auctions</a></li>
+                    <li><a href="#consignment">Consign</a></li>
+                    <li><a href="#commission">Commission</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Wearable Art</h1>
+            <p>Reimagined. Reloved. Reworn. Custom hand-painted clothing.</p>
+            <div class="privacy-notice" role="status">
+                <i class="fas fa-lock" aria-hidden="true"></i> No accounts needed - we respect your privacy!
+            </div>
+            <div class="cta-buttons">
+                <a href="#commission" class="btn btn-primary">
+                    <i class="fas fa-paint-brush" aria-hidden="true"></i> Commission
+                </a>
+                <a href="#shop" class="btn btn-secondary">
+                    <i class="fas fa-shopping-bag" aria-hidden="true"></i> Shop
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section class="section" id="shop">
+        <div class="container">
+            <div class="section-title">
+                <h2>Shop Ready-to-Wear</h2>
+                <p>Discover unique pieces from our collections</p>
+            </div>
+            
+            <div class="shop-filters">
+                <button class="filter active" data-filter="all">All Items</button>
+                <button class="filter" data-filter="custom">Custom Pieces</button>
+                <button class="filter" data-filter="curated">Curated Collection</button>
+            </div>
+            
+            <div class="product-grid">
+                <div class="product-card" data-category="custom">
+                    <div class="product-image">
+                        <img src="images/item.jpg" alt="Spyder Jorts - Hand-painted denim shorts with spiderweb design">
+                    </div>
+                    <div class="product-info">
+                        <h4>Spyder Jorts</h4>
+                        <p class="price">N$150</p>
+                         <p class="size-info">Available in: M, L, XL</p>
+                        <span class="source">Custom Piece</span>
+                        <!-- Shop FormSubmit Integration with honeypot -->
+                        <form action="https://formsubmit.co/kvn41171@gmail.com" method="POST" class="shop-form">
+                            <input type="hidden" name="_subject" value="Shop Purchase - Spyder Jorts">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" value="#">
+                            <input type="text" name="_honey" style="display:none">
+                            <input type="hidden" name="product" value="Spyder Jorts">
+                            <input type="hidden" name="price" value="N$150">
+                            <input type="hidden" name="category" value="Custom Piece">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;" data-product="Spyder Jorts">
+                                Buy Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="curated">
+                    <div class="product-image">
+                        <img src="images/red.jpeg" alt="Red shirt">
+                    </div>
+                    <div class="product-info">
+                        <h4>RED SPYDR SHIRT</h4>
+                        <p class="price">N$90</p>
+                        <p class="size-info">Available in: M, L, XL</p>
+                        <span class="source">Curated Collection</span>
+                        <form action="https://formsubmit.co/kvn41171@gmail.com" method="POST" class="shop-form">
+                            <input type="hidden" name="_subject" value="Shop Purchase - Simp Jacket">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" value="#">
+                            <input type="text" name="_honey" style="display:none">
+                            <input type="hidden" name="product" value="Simp Jacket">
+                            <input type="hidden" name="price" value="N$75">
+                            <input type="hidden" name="category" value="Curated Collection">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;" data-product="Simp Jacket">
+                                Buy Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="curated">
+                    <div class="product-image">
+                        <img src="images/web.jpeg" alt="Black Tee">
+                    </div>
+                    <div class="product-info">
+                        <h4>WEBS? Tee</h4>
+                        <p class="price">N$90</p>
+                        <p class="size-info">Available in: M, L, XL</p>
+                        <span class="source">Curated Collection</span>
+                        <form action="https://formsubmit.co/kvn41171@gmail.com" method="POST" class="shop-form">
+                            <input type="hidden" name="_subject" value="Shop Purchase - Simp Jacket">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" value="#">
+                            <input type="text" name="_honey" style="display:none">
+                            <input type="hidden" name="product" value="Simp Jacket">
+                            <input type="hidden" name="price" value="N$75">
+                            <input type="hidden" name="category" value="Curated Collection">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;" data-product="Simp Jacket">
+                                Buy Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="curated">
+                    <div class="product-image">
+                        <img src="images/chaos.jpeg" alt="Black Jorts">
+                    </div>
+                    <div class="product-info">
+                        <h4>CHA0S Jorts</h4>
+                        <p class="price">N$300</p>
+                        <p class="size-info">Available in: M, L, XL</p>
+                        <span class="source">Curated Collection</span>
+                        <form action="https://formsubmit.co/kvn41171@gmail.com" method="POST" class="shop-form">
+                            <input type="hidden" name="_subject" value="Shop Purchase - Simp Jacket">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" value="#">
+                            <input type="text" name="_honey" style="display:none">
+                            <input type="hidden" name="product" value="Simp Jacket">
+                            <input type="hidden" name="price" value="N$75">
+                            <input type="hidden" name="category" value="Curated Collection">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;" data-product="Simp Jacket">
+                                Buy Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="curated">
+                    <div class="product-image">
+                        <img src="images/clrchr.jpeg" alt="Jorts?">
+                    </div>
+                    <div class="product-info">
+                        <h4>CLR CHR Jorts</h4>
+                        <p class="price">N$250</p>
+                        <p class="size-info">Available in: M, L, XL</p>
+                        <span class="source">Curated Collection</span>
+                        <form action="https://formsubmit.co/kvn41171@gmail.com" method="POST" class="shop-form">
+                            <input type="hidden" name="_subject" value="Shop Purchase - Simp Jacket">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" value="#">
+                            <input type="text" name="_honey" style="display:none">
+                            <input type="hidden" name="product" value="Simp Jacket">
+                            <input type="hidden" name="price" value="N$75">
+                            <input type="hidden" name="category" value="Curated Collection">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;" data-product="Simp Jacket">
+                                Buy Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="curated">
+                    <div class="product-image">
+                        <img src="images/item2.jpg" alt="Simp Jacket - Vintage denim jacket with custom embroidery">
+                    </div>
+                    <div class="product-info">
+                        <h4>Simp Jacket</h4>
+                        <p class="price">N$215</p>
+                        <p class="size-info">Available in: M, L, XL</p>
+                        <span class="source">Curated Collection</span>
+                        <form action="https://formsubmit.co/kvn41171@gmail.com" method="POST" class="shop-form">
+                            <input type="hidden" name="_subject" value="Shop Purchase - Simp Jacket">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" value="#">
+                            <input type="text" name="_honey" style="display:none">
+                            <input type="hidden" name="product" value="Simp Jacket">
+                            <input type="hidden" name="price" value="N$75">
+                            <input type="hidden" name="category" value="Curated Collection">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;" data-product="Simp Jacket">
+                                Buy Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="curated">
+                    <div class="product-image">
+                        <img src="images/item1.jpg" alt="Custom Vans">
+                    </div>
+                    <div class="product-info">
+                        <h4>Custom Vans</h4>
+                        <p class="price">N$600</p>
+                        <p class="size-info">Available in: M, L, XL</p>
+                        <span class="source">Curated Collection</span>
+                        <form action="https://formsubmit.co/kvn41171@gmail.com" method="POST" class="shop-form">
+                            <input type="hidden" name="_subject" value="Shop Purchase - Custom Vans">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" value="#">
+                            <input type="text" name="_honey" style="display:none">
+                            <input type="hidden" name="product" value="Custom Vans">
+                            <input type="hidden" name="price" value="N$600">
+                            <input type="hidden" name="category" value="Curated Collection">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;" data-product="Custom Vans">
+                                Buy Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="custom">
+                    <div class="product-image">
+                        <img src="images/item3.jpg" alt="CHR Jorts - Chrome hearts inspired denim shorts">
+                    </div>
+                    <div class="product-info">
+                        <h4>CHR Jorts</h4>
+                        <p class="price">N$95</p>
+                        <p class="size-info">Available in: M, L, XL</p>
+                        <span class="source">Custom Piece</span>
+                        <form action="https://formsubmit.co/kvn41171@gmail.com" method="POST" class="shop-form">
+                            <input type="hidden" name="_subject" value="Shop Purchase - CHR Jorts">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next" value="#">
+                            <input type="text" name="_honey" style="display:none">
+                            <input type="hidden" name="product" value="CHR Jorts">
+                            <input type="hidden" name="price" value="N$95">
+                            <input type="hidden" name="category" value="Custom Piece">
+                            <button type="submit" class="btn btn-primary" style="width: 100%;" data-product="CHR Jorts">
+                                Buy Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auction Section - STATIC VERSION (You Control) -->
+    <section class="section auction-section" id="auctions">
+        <div class="container">
+            <div class="section-title">
+                <h2>Live Auctions</h2>
+                <p>Bid on unique custom pieces - limited time offers</p>
+            </div>
+            
+            <!-- YOU SET THIS DATE MANUALLY -->
+            <div class="auction-live">
+                <h2>Auction Live</h2>
+                <!-- YOU SET THIS TIME MANUALLY -->
+                <div class="countdown" id="auctionCountdown">48:00:00</div>
+                <p>Ends: <strong>January 31, 2024 8:00 PM</strong></p>
+            </div>
+            
+            <div class="auction-content">
+                <div class="auction-image">
+                    <img src="images/drk.jpeg" alt="DRKSHDW Ricks">
+                </div>
+                <div class="auction-details">
+                    <h3>DRKSHDW Ricks</h3>
+                    <p class="size-info">Available in: size 7</p>
+                    <!-- YOU SET THIS PRICE MANUALLY -->
+                    <p class="current-bid">Current Bid: <strong>N$1200</strong></p>
+                    <!-- YOU SET THIS BIDDER MANUALLY -->
+                    <p class="bidder">High Bidder: @ven</p>
+                    <!-- YOU SET THIS TIME MANUALLY -->
+                    <p class="time-left">Ends in: <span id="timeLeft">2 days</span></p>
+                    
+                    <!-- Bidding Form - Goes to Your Email -->
+                    <div class="bid-form">
+                        <input type="number" id="bidAmount" placeholder="Minimum N$1205" min="1205" aria-label="Bid amount">
+                        <button class="btn btn-primary" id="placeBid">Place Bid</button>
+                    </div>
+                    
+                    <div class="auction-rules">
+                        <h4>How Bidding Works</h4>
+                        <ul>
+                            <li>Minimum N$5 increase per bid</li>
+                            <li>Click "Place Bid" to submit your bid via email</li>
+                            <li>We manually update the highest bid on the website</li>
+                            <li>Winner has 24 hours to complete payment</li>
+                            <li>No account needed - just bid with your name/IG handle</li>
+                            <li><strong>NOTE:</strong> Bid updates appear after we process them</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Second Auction Item -->
+            <div class="auction-content">
+                <div class="auction-image">
+                    <img src="images/rick.jpeg" alt="Rick Docs">
+                </div>
+                <div class="auction-details">
+                    <h3>Rick Docs</h3>
+                    <p class="size-info">Available in: size 7</p>
+                    <p class="current-bid">Current Bid: <strong>N$850</strong></p>
+                    <p class="bidder">High Bidder: @cava</p>
+                    <p class="time-left">Ends in: <span id="timeLeft2">2 days</span></p>
+                    
+                    <div class="bid-form">
+                        <input type="number" id="bidAmount2" placeholder="Minimum N$855" min="855" aria-label="Bid amount">
+                        <button class="btn btn-primary" data-auction="floral-jacket">Place Bid</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Important Note -->
+            <div class="auction-note">
+                <i class="fas fa-info-circle"></i>
+                <strong>IMPORTANT:</strong> This is a static auction display. The bid amount will be updated momentarily.
+            </div>
+        </div>
+    </section>
+
+    <!-- Consignment Section -->
+    <section class="section" id="consignment">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sell Your Pieces</h2>
+                <p>Turn your unworn/worn items into cash</p>
+            </div>
+            
+            <div class="form-section">
+                <form action="https://formsubmit.co/kvn41171@gmail.com" method="POST" id="consignmentForm">
+                    <input type="hidden" name="_subject" value="New Consignment Request">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="#">
+                    <input type="text" name="_honey" style="display:none">
+                    
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" class="form-control" required aria-required="true">
+                        <div class="form-error" id="nameError">Please enter your name</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Your Email *</label>
+                        <input type="email" id="email" name="email" class="form-control" required aria-required="true">
+                        <div class="form-error" id="emailError">Please enter a valid email address</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="instagram">Instagram Handle (Optional)</label>
+                        <input type="text" id="instagram" name="instagram" class="form-control" placeholder="@username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="items">Describe Your Items *</label>
+                        <textarea id="items" name="items" class="form-control" 
+                                  placeholder="List each item with brand, size, condition, and any flaws..." 
+                                  required aria-required="true"></textarea>
+                        <div class="form-error" id="itemsError">Please describe the items you want to consign</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="photos">Photo Links (Optional but recommended)</label>
+                        <input type="text" id="photos" name="photos" class="form-control" 
+                               placeholder="Paste links to photos (Google Drive, Dropbox, Imgur)">
+                        <small style="color: var(--text-light); display: block; margin-top: 5px;">
+                            Upload photos to cloud storage and paste the shareable links here
+                        </small>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;" id="consignmentSubmit">
+                        Submit for Review
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commission Section -->
+    <section class="section" id="commission">
+        <div class="container">
+            <div class="section-title">
+                <h2>Commission Custom Piece</h2>
+                <p>Let's create something amazing together</p>
+            </div>
+            
+            <div class="form-section">
+                <div class="commission-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Consultation</h4>
+                        <p>Fill out our design form</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Design & Quote</h4>
+                        <p>We provide pricing</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Creation</h4>
+                        <p>We work our magic</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>Delivery</h4>
+                        <p>You get your masterpiece</p>
+                    </div>
+                </div>
+                
+                <form action="https://formsubmit.co/kvn41171@gmail.com" method="POST" id="commissionForm">
+                    <input type="hidden" name="_subject" value="New Custom Piece Commission">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="#">
+                    <input type="text" name="_honey" style="display:none">
+                    
+                    <div class="form-group">
+                        <label for="clientName">Your Name *</label>
+                        <input type="text" id="clientName" name="clientName" class="form-control" required aria-required="true">
+                        <div class="form-error" id="clientNameError">Please enter your name</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="clientEmail">Your Email *</label>
+                        <input type="email" id="clientEmail" name="clientEmail" class="form-control" required aria-required="true">
+                        <div class="form-error" id="clientEmailError">Please enter a valid email address</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="itemType">What would you like customized? *</label>
+                        <select id="itemType" name="itemType" class="form-control" required aria-required="true">
+                            <option value="">Select an item type</option>
+                            <option value="jeans">Jeans</option>
+                            <option value="jacket">Denim Jacket</option>
+                            <option value="tshirt">T-Shirt</option>
+                            <option value="shoes">Shoes</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="form-error" id="itemTypeError">Please select an item type</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Do you have the item ready? *</label>
+                        <div style="display: flex; gap: 20px; margin-top: 10px;">
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                <input type="radio" id="haveItem" name="itemStatus" value="have" checked>
+                                <span>I have the item ready</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                <input type="radio" id="needItem" name="itemStatus" value="need">
+                                <span>I'd like you to find the perfect base piece</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="designDescription">Design Inspiration *</label>
+                        <textarea id="designDescription" name="designDescription" class="form-control" 
+                                  placeholder="Describe your vision, theme, colors, styles you like/dislike..." 
+                                  required aria-required="true"></textarea>
+                        <div class="form-error" id="designError">Please describe your design inspiration</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budget">Budget Range *</label>
+                        <select id="budget" name="budget" class="form-control" required aria-required="true">
+                            <option value="">Select a budget range</option>
+                            <option value="100">N$100 (Simple details)</option>
+                            <option value="150-200">N$150-200 (Standard design)</option>
+                            <option value="200-300">N$200-300+ (back and front depending on complexity)</option>
+                            <option value="custom">Custom quote</option>
+                        </select>
+                        <div class="form-error" id="budgetError">Please select a budget range</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timeline">When do you need this completed? *</label>
+                        <input type="date" id="timeline" name="timeline" class="form-control" required aria-required="true" min="<?php echo date('Y-m-d'); ?>">
+                        <div class="form-error" id="timelineError">Please select a completion date</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;" id="commissionSubmit">
+                        Submit Commission Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Custom Pieces</h3>
+                    <p>Where every garment gets a second chance. Reimagined. Reloved. Reworn.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/custompieces.na?igsh=MWk5bHM1NWd1M2V1ag%3D%3D&utm_source=qr" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@custompieces.na" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kvn41171@gmail.com&su=Website%20Inquiry&body=Hello%20Custom%20Pieces," aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#shop">Shop</a></li>
+                        <li><a href="#auctions">Auctions</a></li>
+                        <li><a href="#consignment">Consign</a></li>
+                        <li><a href="#commission">Commission</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span class="contact-email">kvn41171@gmail.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>(+26481) 459-5351</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Rundu/Windhoek</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-lock"></i>
+                            <span>Privacy-First Business</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Custom Pieces. All rights reserved. | Your privacy is our priority - no accounts required!</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <h3>Success!</h3>
+            <p id="modalMessage">Your submission has been received. We'll contact you within 24 hours.</p>
+            <button class="btn btn-primary" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('.nav-links');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            if (!nav.contains(event.target) && !menuBtn.contains(event.target) && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            }
+        });
+        
+        // STATIC AUCTION SYSTEM - You Control Everything Manually
+        
+        // When someone places a bid, it emails you
+        document.getElementById('placeBid').addEventListener('click', function() {
+            const bidAmount = parseInt(document.getElementById('bidAmount').value);
+            const currentBid = 1200; // YOU UPDATE THIS MANUALLY IN HTML
+            const minIncrement = 5;
+            
+            if (isNaN(bidAmount)) {
+                alert('Please enter a valid bid amount');
+                return;
+            }
+            
+            if (bidAmount >= currentBid + minIncrement) {
+                const bidderName = prompt('Enter your name/instagram handle:') || 'anonymous';
+                
+                // Create a form to send bid to your email
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'https://formsubmit.co/kvn41171@gmail.com';
+                form.style.display = 'none';
+                
+                // Add hidden inputs
+                const subject = document.createElement('input');
+                subject.type = 'hidden';
+                subject.name = '_subject';
+                subject.value = `New Bid: N$${bidAmount} for Doc Martens Ricks`;
+                
+                const template = document.createElement('input');
+                template.type = 'hidden';
+                template.name = '_template';
+                template.value = 'table';
+                
+                const bidder = document.createElement('input');
+                bidder.type = 'hidden';
+                bidder.name = 'bidder';
+                bidder.value = bidderName;
+                
+                const amount = document.createElement('input');
+                amount.type = 'hidden';
+                amount.name = 'amount';
+                amount.value = bidAmount;
+                
+                const item = document.createElement('input');
+                item.type = 'hidden';
+                item.name = 'item';
+                item.value = 'Doc Martens Ricks';
+                
+                const honey = document.createElement('input');
+                honey.type = 'text';
+                honey.name = '_honey';
+                honey.style.display = 'none';
+                
+                form.appendChild(subject);
+                form.appendChild(template);
+                form.appendChild(bidder);
+                form.appendChild(amount);
+                form.appendChild(item);
+                form.appendChild(honey);
+                document.body.appendChild(form);
+                
+                // Show success message
+                alert(`Bid of N$${bidAmount} submitted! We'll email you if you win.`);
+                document.getElementById('bidAmount').value = '';
+                
+                // Submit the form
+                setTimeout(() => {
+                    form.submit();
+                    document.body.removeChild(form);
+                }, 100);
+                
+                // Show note about manual updates
+                setTimeout(() => {
+                    showSuccess(`Bid submitted! We'll review it and manually update the website with the new highest bid. Check back soon!`);
+                }, 500);
+            } else {
+                alert(`Bid must be at least N$${currentBid + minIncrement}`);
+            }
+        });
+        
+        // For second auction item
+        document.querySelector('[data-auction="floral-jacket"]').addEventListener('click', function() {
+            const bidAmount = parseInt(document.getElementById('bidAmount2').value);
+            const currentBid = 850; // YOU UPDATE THIS MANUALLY IN HTML
+            const minIncrement = 5;
+            
+            if (isNaN(bidAmount)) {
+                alert('Please enter a valid bid amount');
+                return;
+            }
+            
+            if (bidAmount >= currentBid + minIncrement) {
+                const bidderName = prompt('Enter your name/instagram handle:') || 'anonymous';
+                
+                // Create a form to send bid to your email
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'https://formsubmit.co/kvn41171@gmail.com';
+                form.style.display = 'none';
+                
+                const subject = document.createElement('input');
+                subject.type = 'hidden';
+                subject.name = '_subject';
+                subject.value = `New Bid: N$${bidAmount} for Floral Denim Jacket`;
+                
+                const template = document.createElement('input');
+                template.type = 'hidden';
+                template.name = '_template';
+                template.value = 'table';
+                
+                const bidder = document.createElement('input');
+                bidder.type = 'hidden';
+                bidder.name = 'bidder';
+                bidder.value = bidderName;
+                
+                const amount = document.createElement('input');
+                amount.type = 'hidden';
+                amount.name = 'amount';
+                amount.value = bidAmount;
+                
+                const item = document.createElement('input');
+                item.type = 'hidden';
+                item.name = 'item';
+                item.value = 'Floral Denim Jacket';
+                
+                const honey = document.createElement('input');
+                honey.type = 'text';
+                honey.name = '_honey';
+                honey.style.display = 'none';
+                
+                form.appendChild(subject);
+                form.appendChild(template);
+                form.appendChild(bidder);
+                form.appendChild(amount);
+                form.appendChild(item);
+                form.appendChild(honey);
+                document.body.appendChild(form);
+                
+                alert(`Bid of N$${bidAmount} submitted! We'll email you if you win.`);
+                document.getElementById('bidAmount2').value = '';
+                
+                setTimeout(() => {
+                    form.submit();
+                    document.body.removeChild(form);
+                }, 100);
+                
+                setTimeout(() => {
+                    showSuccess(`Bid submitted! We'll review it and manually update the website.`);
+                }, 500);
+            } else {
+                alert(`Bid must be at least N$${currentBid + minIncrement}`);
+            }
+        });
+        
+        // Simple static countdown display (doesn't actually count down)
+        function showStaticCountdown() {
+            // This is just for display - you set the initial value in HTML
+            const countdownElement = document.getElementById('auctionCountdown');
+            const timeLeftElement = document.getElementById('timeLeft');
+            const timeLeftElement2 = document.getElementById('timeLeft2');
+            
+            // You manually update these in the HTML
+            // They're already set: countdownElement.textContent = "48:00:00";
+            // They're already set: timeLeftElement.textContent = "2 days";
+            // They're already set: timeLeftElement2.textContent = "3 days";
+            
+            // Display a note in console for you (the admin)
+            console.log('%c🔨 AUCTION ADMIN NOTE:', 'color: #FF6B6B; font-size: 14px; font-weight: bold;');
+            console.log('%cYou control the auction manually. Update these in the HTML:', 'color: #FFD166;');
+            console.log('1. Current bid amounts in <strong> tags');
+            console.log('2. High bidder names');
+            console.log('3. Countdown timer display');
+            console.log('4. Time left text');
+            console.log('%cWhen you receive bids via email, update the HTML manually.', 'color: #06D6A0;');
+        }
+        
+        // Shop Filtering
+        document.querySelectorAll('.filter').forEach(filter => {
+            filter.addEventListener('click', function() {
+                const filterValue = this.getAttribute('data-filter');
+                
+                // Update active filter
+                document.querySelectorAll('.filter').forEach(f => f.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter products
+                document.querySelectorAll('.product-card').forEach(product => {
+                    if (filterValue === 'all' || product.getAttribute('data-category') === filterValue) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Form Validation
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        function showError(message, fieldId) {
+            const errorElement = document.getElementById(fieldId + 'Error');
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.classList.add('show');
+            }
+            alert(message);
+        }
+        
+        function clearError(fieldId) {
+            const errorElement = document.getElementById(fieldId + 'Error');
+            if (errorElement) {
+                errorElement.classList.remove('show');
+            }
+        }
+        
+        // Form Submission Handling
+        function showLoading(button) {
+            const originalText = button.innerHTML;
+            button.innerHTML = '<div class="spinner"></div> Processing...';
+            button.classList.add('btn-loading');
+            button.disabled = true;
+            return originalText;
+        }
+        
+        function hideLoading(button, originalText) {
+            button.innerHTML = originalText;
+            button.classList.remove('btn-loading');
+            button.disabled = false;
+        }
+        
+        function showSuccess(message) {
+            const modal = document.getElementById('successModal');
+            const modalMessage = document.getElementById('modalMessage');
+            modalMessage.textContent = message;
+            modal.style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+        
+        // Consignment Form Validation
+        const consignmentForm = document.getElementById('consignmentForm');
+        const consignmentSubmit = document.getElementById('consignmentSubmit');
+        
+        consignmentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Clear previous errors
+            clearError('name');
+            clearError('email');
+            clearError('items');
+            
+            let isValid = true;
+            
+            // Validate name
+            const name = document.getElementById('name').value.trim();
+            if (!name) {
+                showError('Please enter your name', 'name');
+                isValid = false;
+            }
+            
+            // Validate email
+            const email = document.getElementById('email').value.trim();
+            if (!email || !validateEmail(email)) {
+                showError('Please enter a valid email address', 'email');
+                isValid = false;
+            }
+            
+            // Validate items
+            const items = document.getElementById('items').value.trim();
+            if (!items) {
+                showError('Please describe the items', 'items');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Show loading state
+            const originalText = showLoading(consignmentSubmit);
+            
+            // Submit form
+            setTimeout(() => {
+                this.submit();
+                hideLoading(consignmentSubmit, originalText);
+                showSuccess('Your consignment request has been submitted! We\'ll review your items and contact you within 24 hours.');
+                this.reset();
+            }, 1500);
+        });
+        
+        // Commission Form Validation
+        const commissionForm = document.getElementById('commissionForm');
+        const commissionSubmit = document.getElementById('commissionSubmit');
+        
+        commissionForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Clear previous errors
+            clearError('clientName');
+            clearError('clientEmail');
+            clearError('itemType');
+            clearError('design');
+            clearError('budget');
+            clearError('timeline');
+            
+            let isValid = true;
+            
+            // Validate name
+            const name = document.getElementById('clientName').value.trim();
+            if (!name) {
+                showError('Please enter your name', 'clientName');
+                isValid = false;
+            }
+            
+            // Validate email
+            const email = document.getElementById('clientEmail').value.trim();
+            if (!email || !validateEmail(email)) {
+                showError('Please enter a valid email address', 'clientEmail');
+                isValid = false;
+            }
+            
+            // Validate item type
+            const itemType = document.getElementById('itemType').value;
+            if (!itemType) {
+                showError('Please select an item type', 'itemType');
+                isValid = false;
+            }
+            
+            // Validate design description
+            const design = document.getElementById('designDescription').value.trim();
+            if (!design) {
+                showError('Please describe your design inspiration', 'design');
+                isValid = false;
+            }
+            
+            // Validate budget
+            const budget = document.getElementById('budget').value;
+            if (!budget) {
+                showError('Please select a budget range', 'budget');
+                isValid = false;
+            }
+            
+            // Validate timeline
+            const timeline = document.getElementById('timeline').value;
+            if (!timeline) {
+                showError('Please select a completion date', 'timeline');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Show loading state
+            const originalText = showLoading(commissionSubmit);
+            
+            // Submit form
+            setTimeout(() => {
+                this.submit();
+                hideLoading(commissionSubmit, originalText);
+                showSuccess('Your commission request has been submitted! We\'ll send you a quote within 24 hours.');
+                this.reset();
+            }, 1500);
+        });
+        
+        // Shop form submissions
+        document.querySelectorAll('.shop-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const button = this.querySelector('button[type="submit"]');
+                const product = button.getAttribute('data-product');
+                const originalText = showLoading(button);
+                
+                setTimeout(() => {
+                    this.submit();
+                    hideLoading(button, originalText);
+                    showSuccess(`Thank you for your purchase of ${product}! We will contact you within 24 hours to arrange payment and delivery.`);
+                }, 1500);
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+        
+        // Real-time form validation
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('input', function() {
+                const fieldId = this.id;
+                clearError(fieldId);
+                
+                // Email validation on the fly
+                if (fieldId.includes('email') || fieldId.includes('Email')) {
+                    const email = this.value.trim();
+                    if (email && !validateEmail(email)) {
+                        showError('Please enter a valid email address', fieldId);
+                    }
+                }
+            });
+        });
+        
+        // Set minimum date for timeline
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('timeline').min = today;
+        
+        // Initialize the page
+        showStaticCountdown();
+        
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
+        // Close modal on background click
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
