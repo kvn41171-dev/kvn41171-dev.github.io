@@ -1823,22 +1823,104 @@
             }, 1500);
         });
         
-        // Shop form submissions
-        document.querySelectorAll('.shop-form').forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const button = this.querySelector('button[type="submit"]');
-                const product = button.getAttribute('data-product');
-                const originalText = showLoading(button);
-                
-                setTimeout(() => {
-                    this.submit();
-                    hideLoading(button, originalText);
-                    showSuccess(`Thank you for your purchase of ${product}! We will contact you within 24 hours to arrange payment and delivery.`);
-                }, 1500);
-            });
-        });
+// SHOP PURCHASE SYSTEM - Auction Style Prompts (Email/IG only)
+document.querySelectorAll('.shop-form').forEach(form => {
+    const button = form.querySelector('button[type="submit"]');
+    
+    // Change button from type="submit" to type="button" to prevent immediate form submission
+    button.type = 'button';
+    
+    // Add data attributes for the product info (if not already there)
+    if (!button.hasAttribute('data-product')) {
+        const productName = form.querySelector('input[name="product"]')?.value || 'Product';
+        const price = form.querySelector('input[name="price"]')?.value || 'N$0';
+        button.setAttribute('data-product', productName);
+        button.setAttribute('data-price', price);
+    }
+    
+    button.addEventListener('click', function() {
+        const product = this.getAttribute('data-product');
+        const price = this.getAttribute('data-price');
+        
+        // Ask for customer info like the auction system - only email or IG
+        const customerInfo = prompt(`Purchase ${product} (${price})\n\nEnter your email OR Instagram handle:\nExample: email@example.com\nOR\n@username`);
+        
+        if (!customerInfo || customerInfo.trim() === '') {
+            alert('Purchase cancelled');
+            return;
+        }
+        
+        const contactInfo = customerInfo.trim();
+        let email = '';
+        let name = '';
+        
+        // Check if it's an email (contains @) or Instagram handle (starts with @)
+        if (contactInfo.includes('@')) {
+            if (contactInfo.startsWith('@')) {
+                // It's an Instagram handle
+                name = contactInfo;
+            } else {
+                // It's an email
+                email = contactInfo;
+                name = 'customer';
+            }
+        } else {
+            // If no @, assume it's an IG handle without @
+            name = '@' + contactInfo;
+        }
+        
+        // Validate if it's an email
+        if (email && !validateEmail(email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
+        
+        // If no email provided, make sure at least IG handle is provided
+        if (!email && !name) {
+            alert('Please provide either an email address or Instagram handle');
+            return;
+        }
+        
+        // Create hidden input fields for customer info in the existing form
+        let emailInput = form.querySelector('input[name="customer_email"]');
+        let nameInput = form.querySelector('input[name="customer_name"]');
+        
+        // Create them if they don't exist
+        if (!emailInput) {
+            emailInput = document.createElement('input');
+            emailInput.type = 'hidden';
+            emailInput.name = 'customer_email';
+            form.appendChild(emailInput);
+        }
+        
+        if (!nameInput) {
+            nameInput = document.createElement('input');
+            nameInput.type = 'hidden';
+            nameInput.name = 'customer_name';
+            form.appendChild(nameInput);
+        }
+        
+        // Set the values
+        emailInput.value = email;
+        nameInput.value = name;
+        
+        // Show loading state
+        const originalText = showLoading(this);
+        
+        // Show success message and submit
+        setTimeout(() => {
+            form.submit();
+            hideLoading(this, originalText);
+            
+            // Show appropriate success message
+            if (email) {
+                showSuccess(`Purchase submitted for ${product}! We'll contact you at ${email} to arrange payment and delivery.`);
+            } else {
+                showSuccess(`Purchase submitted for ${product}! We'll contact you via ${name} to arrange payment and delivery.`);
+            }
+        }, 1000);
+    });
+});
         
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
